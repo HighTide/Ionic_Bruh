@@ -1,6 +1,8 @@
 {
   "name": "Bruh",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "c03cff03"
 }
