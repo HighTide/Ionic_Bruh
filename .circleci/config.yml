@@ -2,7 +2,7 @@ version: 2
 jobs:
     build:
         docker:
-            - {image: 'circleci/android:api-23-node'}
+            - {image: 'circleci/android:api-27-node'}
         working_directory: ~/repo
         environment:
             JVM_OPTS: '-Xmx3200m'
