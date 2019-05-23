@@ -15,6 +15,7 @@ export class Tab3Page {
      id: string;
      canvas: any;
      canvasTX: any;
+     ionContent: any;
 
 
     constructor(canvas) {
@@ -26,9 +27,9 @@ export class Tab3Page {
       this.canvasTX = this.canvas.getContext('2d');
 
       // Setting size of canvas based on size of ion-content.
-      const ionContent = document.getElementById('ionContent');
-      this.canvas.width = ionContent.offsetWidth;
-      this.canvas.height = ionContent.offsetHeight;
+      this.ionContent = document.getElementById('ionContent');
+      this.canvas.width = this.ionContent.offsetWidth;
+      this.canvas.height = this.ionContent.offsetHeight;
       this.focus();
 
     }
@@ -38,7 +39,7 @@ export class Tab3Page {
       this.canvasTX.beginPath();
       this.canvasTX.lineWidth = 5;
       this.canvasTX.strokeStyle = 'rgba(255,255,255,1)';
-      this.canvasTX.rect((ionContent.offsetWidth / 2) - (150 / 2), (ionContent.offsetHeight / 2) - (150 / 2), 150, 150);
+      this.canvasTX.rect((this.ionContent.offsetWidth / 2) - (150 / 2), (this.ionContent.offsetHeight / 2) - (150 / 2), 150, 150);
       this.canvasTX.stroke();
     }
 
@@ -63,8 +64,7 @@ export class Tab3Page {
 
     UploadToCloud(img) {
       // tslint:disable-next-line:max-line-length
-      const url = 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4b9f1983-f36e-4c79-bccc-7c334eef65df/detect/iterations/Iteration4/image'
-
+      const url = 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4b9f1983-f36e-4c79-bccc-7c334eef65df/detect/iterations/Iteration4/image';
       const Req = new XMLHttpRequest();
       Req.open('POST', url, true);
       Req.setRequestHeader('Prediction-Key' , 'afda0bc51a1445cea715a5f066a3239a');
@@ -158,7 +158,7 @@ export class Tab3Page {
     this.cameraPreview.stopCamera().then(
         (res) => {
           // console.log(res);
-          console.log('Camera stopped');
+          console.log('Camera stopped ' + res);
         },
         (err) => {
           console.log(err);
