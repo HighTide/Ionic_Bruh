@@ -7,5 +7,11 @@
 </ion-header>
 
 <ion-content id="ionContent">
-  <canvas id="BoundingBoxCanvas"></canvas>
+    <canvas id="BoundingBoxCanvas"></canvas>
+
+    <!-- Test button to call the popover -->
+    <ion-button (click)="presentPopover($event)">
+        Test button popover
+    </ion-button>
+
 </ion-content>

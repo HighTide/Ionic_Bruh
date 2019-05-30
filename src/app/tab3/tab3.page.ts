@@ -1,15 +1,45 @@
 import { Component } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 // tslint:disable-next-line:max-line-length
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
+
+// Different popover pags
+import { PopoverPageLamp } from './popover/tab3.popover.lamp';
+import { PopoverPageWindow } from './popover/tab3.popover.window';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
+
 export class Tab3Page {
-  constructor(public cameraPreview: CameraPreview) {}
+    constructor(public cameraPreview: CameraPreview, public popoverCtrl: PopoverController) { }
+
+    async presentPopover(myEvent) {
+
+        let obj = "Window";
+        let cmp = null;
+
+        // Selects the object's class 
+        switch (obj) {
+            case "Lamp": {
+                cmp = PopoverPageLamp;
+                break;
+            }
+            case "Window": {
+                cmp = PopoverPageWindow;
+                break;
+            }
+            default: { }
+        }
+
+        // Creates the popover
+        const popover = await this.popoverCtrl.create({ component: cmp, event: myEvent, translucent: true });
+        return await popover.present();
+
+    }
 
   static BoundingBoxCanvas = class {
      id: string;
@@ -106,7 +136,8 @@ export class Tab3Page {
       console.log(json);
       // document.querySelector("#output").innerHTML = JSON.stringify(json);
       json.predictions.forEach((pre) => {
-        if (pre.probability >= 0.5) {
+          if (pre.probability >= 0.5) {
+            //TODO: Call popover function with the object from the json file
           this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height);
         } else {
           // this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height, "Green")
