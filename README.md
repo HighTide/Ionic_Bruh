@@ -1,6 +1,7 @@
 # Ionic_Bruh
 ## Installing
 npm install
+
 npm install ionic -g
 
 ## Run
