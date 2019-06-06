@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 // Importing Camera Module
 import { Camera } from '@ionic-native/camera/ngx';
 // tslint:disable-next-line:max-line-length

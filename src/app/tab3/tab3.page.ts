@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+
 
 // tslint:disable-next-line:max-line-length
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
+
+import { ModalPageBed } from './modal/tab3.modal.bed';
 
 @Component({
   selector: 'app-tab3',
@@ -9,7 +14,89 @@ import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, Camer
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  constructor(public cameraPreview: CameraPreview) {}
+    constructor(public cameraPreview: CameraPreview, public modalController: ModalController, public toastController: ToastController) { }
+
+    async presentModal() {
+
+        let obj = "Bed";
+        let cmp = null;
+
+        // Selects the object's class 
+        switch (obj) {
+            case "Fan": {
+                //cmp = ;
+                break;
+            }
+            case "Window": {
+                //cmp = ;
+                break;
+            }
+            case "Bed": {
+                cmp = ModalPageBed;
+                break;
+            }
+            case "Lamp": {
+                //cmp = ;
+                break;
+            }
+            case "Fridge": {
+                //cmp = ;
+                break;
+            }
+            case "TV": {
+                //cmp = ;
+                break;
+            }
+            default: { }
+        }
+
+        const modal = await this.modalController.create({
+            component: ModalPageBed,
+            componentProps: { value: 123 }
+        });
+        return await modal.present();
+    }
+
+    async presentToast() {
+
+        let obj = "Bed";
+        let cmp = null;
+
+        // Selects the object's class 
+        switch (obj) {
+            case "Fan": {
+                //cmp = ;
+                break;
+            }
+            case "Window": {
+                //cmp = ;
+                break;
+            }
+            case "Bed": {
+                cmp = 'New sheets have been requested';
+                break;
+            }
+            case "Lamp": {
+                //cmp = ;
+                break;
+            }
+            case "Fridge": {
+                //cmp = ;
+                break;
+            }
+            case "TV": {
+                //cmp = ;
+                break;
+            }
+            default: { }
+        }
+
+        const toast = await this.toastController.create({
+            message: cmp,
+            duration: 2000
+        });
+        toast.present();
+    }
 
   static BoundingBoxCanvas = class {
      id: string;
