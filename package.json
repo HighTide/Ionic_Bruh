@@ -80,6 +80,11 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-camera-preview": {
         "ANDROID_SUPPORT_LIBRARY_VERSION": "26+"
+      },
+      "cordova-plugin-ionic": {
+        "APP_ID": "c03cff03",
+        "CHANNEL_NAME": "Master",
+        "UPDATE_METHOD": "auto"
       }
     },
     "platforms": [
