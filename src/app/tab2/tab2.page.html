@@ -7,12 +7,25 @@
 </ion-header>
 
 <ion-content>
-  Hi
-  <img [src]="currentImage" *ngIf="currentImage">
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="takePicture()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <!-- List of Text Items -->
+  <ion-list>
+    <ion-item>
+      <ion-label (click)="presentModal('Fan')">Fan</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="presentModal('Window')">Window</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="presentModal('Bed')">Bed</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="presentModal('Lamp')">Lamp</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="presentModal('Fridge')">Fridge</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="presentModal('TV')">TV</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
-

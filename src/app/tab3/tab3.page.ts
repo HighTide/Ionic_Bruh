@@ -6,7 +6,12 @@ import { ToastController } from '@ionic/angular';
 // tslint:disable-next-line:max-line-length
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
 
-import { ModalPageBed } from './modal/tab3.modal.bed';
+import {ModalPageBedComponent} from '../modal/modal.bed';
+import {ModalPageWindowComponent} from '../modal/modal.window';
+import {ModalPageFanComponent} from '../modal/modal.fan';
+import {ModalPageLampComponent} from '../modal/modal.lamp';
+import {ModalPageFridgeComponent} from '../modal/modal.fridge';
+import {ModalPageTvComponent} from '../modal/modal.tv';
 
 @Component({
   selector: 'app-tab3',
@@ -16,76 +21,82 @@ import { ModalPageBed } from './modal/tab3.modal.bed';
 export class Tab3Page {
     constructor(public cameraPreview: CameraPreview, public modalController: ModalController, public toastController: ToastController) { }
 
-    async presentModal() {
+    async presentModal(obj) {
 
-        let obj = "Bed";
+        // let obj = "Bed";
         let cmp = null;
+        alert(obj)
 
-        // Selects the object's class 
+        // Selects the object's class
         switch (obj) {
-            case "Fan": {
-                //cmp = ;
+            case 'Fan'.toString(): {
+                cmp = ModalPageFanComponent;
                 break;
             }
-            case "Window": {
-                //cmp = ;
+            case 'Window'.toString(): {
+                cmp = ModalPageWindowComponent;
                 break;
             }
-            case "Bed": {
-                cmp = ModalPageBed;
+            case 'Bed'.toString(): {
+                cmp = ModalPageBedComponent;
                 break;
             }
-            case "Lamp": {
-                //cmp = ;
+            case 'Lamp'.toString(): {
+                cmp = ModalPageLampComponent;
                 break;
             }
-            case "Fridge": {
-                //cmp = ;
+            case 'Fridge'.toString(): {
+                cmp = ModalPageFridgeComponent;
                 break;
             }
-            case "TV": {
-                //cmp = ;
+            case 'TV'.toString(): {
+                cmp = ModalPageTvComponent;
                 break;
             }
-            default: { }
+            default: {
+                cmp = false;
+            }
         }
 
-        const modal = await this.modalController.create({
-            component: ModalPageBed,
-            componentProps: { value: 123 }
-        });
-        return await modal.present();
+        if (cmp !== false) {
+            const modal = await this.modalController.create({
+                component: cmp,
+                componentProps: { value: 125 }
+            });
+            return await modal.present();
+        }
+
     }
 
     async presentToast() {
 
-        let obj = "Bed";
+        const obj = 'Bed';
         let cmp = null;
 
         // Selects the object's class 
         switch (obj) {
-            case "Fan": {
-                //cmp = ;
+            case 'Fan'.toString(): {
+                // cmp = ;
                 break;
             }
-            case "Window": {
-                //cmp = ;
+            case 'Window'.toString(): {
+                cmp = 'Window is opened!';
                 break;
             }
-            case "Bed": {
+            case 'Bed'.toString(): {
                 cmp = 'New sheets have been requested';
                 break;
             }
-            case "Lamp": {
+            case 'Lamp'.toString(): {
                 //cmp = ;
                 break;
             }
-            case "Fridge": {
-                //cmp = ;
+            case 'Fridge'.toString(): {
+                // cmp = ;
                 break;
             }
-            case "TV": {
-                //cmp = ;
+            case 'TV'.toString(): {
+                // cmp = ;
                 break;
             }
             default: { }
@@ -149,7 +160,7 @@ export class Tab3Page {
       return new Blob([uInt8Array], { type: contentType });
     }
 
-    UploadToCloud(img) {
+    UploadToCloud(context, img) {
       // tslint:disable-next-line:max-line-length
       const url = 'https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/369d841e-3d27-40a6-9a27-b544385cf46c/detect/iterations/Iteration4/image';
       const Req = new XMLHttpRequest();
@@ -161,7 +172,7 @@ export class Tab3Page {
       Req.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
           console.log(this.responseText);
-          instance.ParseOutput(this.responseText);
+          instance.ParseOutput(context, this.responseText);
         }
       };
       Req.send(this.makeblob(img));
@@ -188,13 +199,15 @@ export class Tab3Page {
       this.canvasTX.strokeRect(x0, y0, x1, y1);
       console.log('Drawing Box'); }
 
-    ParseOutput(json) {
+    ParseOutput(context, json) {
       json = JSON.parse(json);
       console.log(json);
       // document.querySelector("#output").innerHTML = JSON.stringify(json);
       json.predictions.forEach((pre) => {
         if (pre.probability >= 0.5) {
           this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height);
+          // alert(JSON.stringify(pre));
+          context.presentModal(pre.tagName);
         } else {
           // this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height, "Green")
         }
@@ -254,7 +267,7 @@ export class Tab3Page {
 
   Detect() {
     this.cameraPreview.takeSnapshot({quality: 75})
-        .then(base64Picture => this.BoundingBox.UploadToCloud('data:image/jpeg;base64,' + base64Picture));
+        .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
   }
 
 }
