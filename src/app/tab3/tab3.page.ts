@@ -165,7 +165,7 @@ export class Tab3Page {
       const url = 'https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/369d841e-3d27-40a6-9a27-b544385cf46c/detect/iterations/Iteration4/image';
       const Req = new XMLHttpRequest();
       Req.open('POST', url, true);
-      Req.setRequestHeader('Prediction-Key' , 'e55e4dd0723747109b8bfef99062b006');
+      Req.setRequestHeader('Prediction-Key' , 'asd');
       Req.setRequestHeader('Content-Type' , 'application/octet-stream');
       // Call Function on status change!
       const instance = this;
