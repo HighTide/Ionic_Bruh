@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
             <ion-button color="light" (click)="close()">
                 <ion-icon name="close"></ion-icon>
             </ion-button>
-                <ion-title>Bed</ion-title>
+                <ion-title>Window</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -18,7 +18,7 @@ import { ToastController } from '@ionic/angular';
                     <ion-col size="3">
                     </ion-col>
                     <ion-col>
-                      <ion-button class="center" (click)="presentToast()">Request new sheets</ion-button>
+                      <ion-button class="center">Open / Close Blinds</ion-button>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
@@ -29,24 +29,13 @@ import { ToastController } from '@ionic/angular';
     selector: 'page-modal'
 })
 
-export class ModalPageBed {
+export class ModalPageWindowComponent {
 
     constructor(private ctrl: ModalController) { }
 
     async close() {
         this.ctrl.dismiss();
     }
-} 
 
-export class ToastPageBed {
-
-    constructor(private ctrl: ToastController) { }
-
-    async presentToast() {
-        const toast = await this.ctrl.create({
-            message: 'New sheets have been requested',
-            duration: 2000
-        });
-        toast.present();
-    }
+    // Something ToastController Here
 }

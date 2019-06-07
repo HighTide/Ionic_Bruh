@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
-// Importing Camera inside tab2
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {ModalPageBedComponent} from '../modal/modal.bed';
+import {ModalPageWindowComponent} from '../modal/modal.window';
+import {ModalPageFanComponent} from '../modal/modal.fan';
+import {ModalPageLampComponent} from '../modal/modal.lamp';
+import {ModalPageFridgeComponent} from '../modal/modal.fridge';
+import {ModalPageTvComponent} from '../modal/modal.tv';
 
 @Component({
   selector: 'app-tab2',
@@ -9,24 +15,51 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  currentImage: any;
+  constructor(public modalController: ModalController, public toastController: ToastController) { }
 
-  constructor(private camera: Camera) { }
+  async presentModal(obj) {
 
-  takePicture() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+    // let obj = "Bed";
+    let cmp = null;
+
+    switch (obj) {
+      case 'Fan'.toString(): {
+        cmp = ModalPageFanComponent;
+        break;
+      }
+      case 'Window'.toString(): {
+        cmp = ModalPageWindowComponent;
+        break;
+      }
+      case 'Bed'.toString(): {
+        cmp = ModalPageBedComponent;
+        break;
+      }
+      case 'Lamp'.toString(): {
+        cmp = ModalPageLampComponent;
+        break;
+      }
+      case 'Fridge'.toString(): {
+        cmp = ModalPageFridgeComponent;
+        break;
+      }
+      case 'TV'.toString(): {
+        cmp = ModalPageTvComponent;
+        break;
+      }
+      default: {
+        cmp = false;
+      }
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.currentImage = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-      console.log("Camera issue:" + err);
-    });
+    if (cmp !== false) {
+      const modal = await this.modalController.create({
+        component: cmp,
+        componentProps: { value: 125 }
+      });
+      return await modal.present();
+    }
+
   }
 }
 

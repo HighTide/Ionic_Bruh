@@ -1,6 +1,7 @@
 # Ionic_Bruh
 ## Installing
 npm install
+
 npm install ionic -g
 
 ## Run
@@ -12,3 +13,5 @@ ionic serve
 ionic cordova prepare android 
 #### Live Updating
 ionic cordova run android -l
+#### Simulator
+Make sure the Android Simulator is open and running
