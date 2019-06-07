@@ -12,28 +12,19 @@ import { ModalPageFridgeComponent } from '../modal/modal.fridge';
 import { ModalPageFanComponent } from '../modal/modal.fan';
 import { ModalPageWindowComponent } from '../modal/modal.window';
 
+import {SharedModalModule} from '../modal/modal.module';
+
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-      RouterModule.forChild([{ path: '', component: Tab3Page }]),
-      RouterModule.forChild([{ path: '', component: ModalPageBedComponent }]),
-      RouterModule.forChild([{ path: '', component: ModalPageFanComponent }]),
-      RouterModule.forChild([{ path: '', component: ModalPageFridgeComponent }]),
-      RouterModule.forChild([{ path: '', component: ModalPageLampComponent }]),
-      RouterModule.forChild([{ path: '', component: ModalPageTvComponent }]),
-      RouterModule.forChild([{ path: '', component: ModalPageWindowComponent }])
+    RouterModule.forChild([{ path: '', component: Tab3Page }]),
+    SharedModalModule
   ],
   declarations: [
       Tab3Page,
-      ModalPageBedComponent,
-      ModalPageFanComponent,
-      ModalPageFridgeComponent,
-      ModalPageLampComponent,
-      ModalPageTvComponent,
-      ModalPageWindowComponent
   ]
 })
 export class Tab3PageModule {}
