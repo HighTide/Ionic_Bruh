@@ -9,3 +9,11 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-modal {
+    bottom: 0;
+    min-height: initial;
+    top: initial;
+    height: 50%;
+    margin-top: 360px;
+}
