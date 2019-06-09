@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Console } from '@angular/core/src/console';
 
 @Component({
     template:
@@ -12,13 +13,46 @@ import { ToastController } from '@ionic/angular';
                 <ion-title>TV</ion-title>
             </ion-toolbar>
         </ion-header>
-        <ion-content>
+        <ion-content [scrollEvents]="true">
             <ion-grid>
                 <ion-row>
                     <ion-col size="3">
                     </ion-col>
-                    <ion-col>
-                      <ion-button class="center">123</ion-button>
+                    <ion-col class="center">
+                      <ion-button class="center">1</ion-button>
+                      <ion-button class="center">2</ion-button>
+                      <ion-button class="center">3</ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="3">
+                    </ion-col>
+                    <ion-col class="center">
+                      <ion-button class="center">4</ion-button>
+                      <ion-button class="center">5</ion-button>
+                      <ion-button class="center">6</ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="3">
+                    </ion-col>
+                    <ion-col class="center">
+                      <ion-button class="center">7</ion-button>
+                      <ion-button class="center">8</ion-button>
+                      <ion-button class="center">9</ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4.5">
+                    </ion-col>
+                    <ion-col size="3">
+                      <ion-button class="center">0</ion-button>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
@@ -29,6 +63,7 @@ import { ToastController } from '@ionic/angular';
     selector: 'page-modal'
 })
 
+
 export class ModalPageTvComponent {
 
     constructor(private ctrl: ModalController) { }
@@ -38,4 +73,16 @@ export class ModalPageTvComponent {
     }
 
     // Something ToastController Here
+}
+
+export class ToastPageTv {
+    constructor(private ctrl: ToastController) { }
+
+    async presentToast() {
+        const toast = await this.ctrl.create({
+            message: 'Channel has been set to ',
+            duration: 2000
+        });
+        toast.present();
+    }
 }
