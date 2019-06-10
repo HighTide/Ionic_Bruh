@@ -18,7 +18,10 @@ import { ToastController } from '@ionic/angular';
                     <ion-col size="3">
                     </ion-col>
                     <ion-col>
-                      <ion-button class="center">Open / Close Blinds</ion-button>
+                        <ion-range pin="true" min="1" max="10" snaps="true" color="secondary">
+                            <ion-icon size="small" name="sunny" slot="start">min</ion-icon>
+                            <ion-icon name="sunny" slot="end">max</ion-icon>
+                        </ion-range>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>

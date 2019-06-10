@@ -18,7 +18,10 @@ import { ToastController } from '@ionic/angular';
                     <ion-col size="3">
                     </ion-col>
                     <ion-col>
-                      <ion-button class="center">Lamp123</ion-button>
+                        <ion-item>
+                            <ion-label>On/Off</ion-label>
+                            <ion-toggle slot="end" value="Lights" ></ion-toggle>
+                        </ion-item>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
