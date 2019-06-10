@@ -13,15 +13,20 @@ import { Console } from '@angular/core/src/console';
                 <ion-title>TV</ion-title>
             </ion-toolbar>
         </ion-header>
-        <ion-content [scrollEvents]="true">
+        <ion-content fullscreen>
             <ion-grid>
                 <ion-row>
+                    <ion-col align="left">
+                        <ion-button class="center" shape="round"><ion-icon name="power"></ion-icon></ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
                     <ion-col size="3">
                     </ion-col>
                     <ion-col class="center">
-                      <ion-button class="center">1</ion-button>
-                      <ion-button class="center">2</ion-button>
-                      <ion-button class="center">3</ion-button>
+                        <ion-button class="center">1</ion-button>
+                        <ion-button class="center">2</ion-button>
+                        <ion-button class="center">3</ion-button>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
@@ -30,9 +35,9 @@ import { Console } from '@angular/core/src/console';
                     <ion-col size="3">
                     </ion-col>
                     <ion-col class="center">
-                      <ion-button class="center">4</ion-button>
-                      <ion-button class="center">5</ion-button>
-                      <ion-button class="center">6</ion-button>
+                        <ion-button class="center">4</ion-button>
+                        <ion-button class="center">5</ion-button>
+                        <ion-button class="center">6</ion-button>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
@@ -41,9 +46,9 @@ import { Console } from '@angular/core/src/console';
                     <ion-col size="3">
                     </ion-col>
                     <ion-col class="center">
-                      <ion-button class="center">7</ion-button>
-                      <ion-button class="center">8</ion-button>
-                      <ion-button class="center">9</ion-button>
+                        <ion-button class="center">7</ion-button>
+                        <ion-button class="center">8</ion-button>
+                        <ion-button class="center">9</ion-button>
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
@@ -52,7 +57,37 @@ import { Console } from '@angular/core/src/console';
                     <ion-col size="4.5">
                     </ion-col>
                     <ion-col size="3">
-                      <ion-button class="center">0</ion-button>
+                        <ion-button class="center">0</ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        Volume
+                        <ion-button class="center">Volume +</ion-button>
+                        <ion-button class="center">Volume -</ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                    </ion-col>
+                    <ion-col>
+                        Channel
+                        <ion-button class="center">Next</ion-button>
+                        <ion-button class="center">Prev</ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="3.5">
+                    </ion-col>
+                    <ion-col>
+                    BruH TV Remote
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="3">
+                    </ion-col>
+                    <ion-col size="3">
+                    Made by Rick
                     </ion-col>
                     <ion-col size="3">
                     </ion-col>
