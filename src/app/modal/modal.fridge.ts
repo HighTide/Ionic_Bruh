@@ -6,24 +6,16 @@ import { ToastController } from '@ionic/angular';
     template:
         `<ion-header>
             <ion-toolbar>
-            <ion-button color="light" (click)="close()">
-                <ion-icon name="close"></ion-icon>
-            </ion-button>
                 <ion-title>Fridge</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col size="3">
-                    </ion-col>
-                    <ion-col>
-                      <ion-button class="center">Fridge</ion-button>
-                    </ion-col>
-                    <ion-col size="3">
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <div style="margin: 30px 10px 0px 10px !important;">
+                <ion-button expand="block" (click)="toast()">Request refill fridge</ion-button>
+            </div>
+            <div style="margin: 30px 10px 0px 10px !important;">
+                <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
+            </div>
         </ion-content>`,
 
     selector: 'page-modal'
@@ -31,11 +23,19 @@ import { ToastController } from '@ionic/angular';
 
 export class ModalPageFridgeComponent {
 
-    constructor(private ctrl: ModalController) { }
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
 
     async close() {
         this.ctrl.dismiss();
     }
 
-    // Something ToastController Here
+    async toast() {
+
+        const toast = await this.toastCtrl.create({
+            message: 'Your request has been send to the hotel',
+            duration: 2000
+        });
+
+        toast.present();
+    }
 }
