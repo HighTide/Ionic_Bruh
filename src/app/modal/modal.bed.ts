@@ -32,7 +32,7 @@ export class ModalPageBedComponent {
     async toast() {
 
         const toast = await this.toastCtrl.create({
-            message: 'Your request has been send to the hotel',
+            message: 'Your request has been sent to the hotel',
             duration: 2000
         });
 
