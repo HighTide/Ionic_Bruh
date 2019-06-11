@@ -266,7 +266,7 @@ export class Tab3Page {
   }
 
   Detect() {
-    this.cameraPreview.takeSnapshot({quality: 75})
+    this.cameraPreview.takePicture({quality: 75})
         .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
   }
 
