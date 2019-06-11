@@ -68,46 +68,46 @@ export class Tab3Page {
 
     }
 
-    async presentToast() {
+    //async presentToast() {
 
-        const obj = 'Bed';
-        let cmp = null;
+    //    const obj = 'Bed';
+    //    let cmp = null;
 
-        // Selects the object's class 
-        switch (obj) {
-            case 'Fan'.toString(): {
-                // cmp = ;
-                break;
-            }
-            case 'Window'.toString(): {
-                cmp = 'Window is opened!';
-                break;
-            }
-            case 'Bed'.toString(): {
-                cmp = 'New sheets have been requested';
-                break;
-            }
-            case 'Lamp'.toString(): {
-                //cmp = ;
-                break;
-            }
-            case 'Fridge'.toString(): {
-                // cmp = ;
-                break;
-            }
-            case 'TV'.toString(): {
-                // cmp = ;
-                break;
-            }
-            default: { }
-        }
+    //    // Selects the object's class 
+    //    switch (obj) {
+    //        case 'Fan'.toString(): {
+    //            // cmp = ;
+    //            break;
+    //        }
+    //        case 'Window'.toString(): {
+    //            cmp = 'Window is opened!';
+    //            break;
+    //        }
+    //        case 'Bed'.toString(): {
+    //            cmp = 'New sheets have been requested';
+    //            break;
+    //        }
+    //        case 'Lamp'.toString(): {
+    //            //cmp = ;
+    //            break;
+    //        }
+    //        case 'Fridge'.toString(): {
+    //            // cmp = ;
+    //            break;
+    //        }
+    //        case 'TV'.toString(): {
+    //            // cmp = ;
+    //            break;
+    //        }
+    //        default: { }
+    //    }
 
-        const toast = await this.toastController.create({
-            message: cmp,
-            duration: 2000
-        });
-        toast.present();
-    }
+    //    const toast = await this.toastController.create({
+    //        message: cmp,
+    //        duration: 2000
+    //    });
+    //    toast.present();
+    //}
 
   static BoundingBoxCanvas = class {
      id: string;

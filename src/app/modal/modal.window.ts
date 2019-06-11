@@ -1,29 +1,27 @@
 ﻿import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
     template:
         `<ion-header>
             <ion-toolbar>
-            <ion-button color="light" (click)="close()">
-                <ion-icon name="close"></ion-icon>
-            </ion-button>
                 <ion-title>Window</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col size="3">
-                    </ion-col>
-                    <ion-col>
-                      <ion-button class="center">Open / Close Blinds</ion-button>
-                    </ion-col>
-                    <ion-col size="3">
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <div style="margin: 30px 10px 0px 10px !important;">
+                <ion-segment (ionChange)="segmentChanged($event)">
+                  <ion-segment-button (click)=toast(true)>
+                    <ion-label>Open</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button (click)=toast(false) checked>
+                    <ion-label>Close</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+            </div>
+            <div style="margin: 30px 10px 0px 10px !important;">
+                <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
+            </div>           
         </ion-content>`,
 
     selector: 'page-modal'
@@ -31,11 +29,28 @@ import { ToastController } from '@ionic/angular';
 
 export class ModalPageWindowComponent {
 
-    constructor(private ctrl: ModalController) { }
+    constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
     async close() {
-        this.ctrl.dismiss();
+        this.modalCtrl.dismiss();
     }
 
-    // Something ToastController Here
+    async toast(value) {
+
+        let _message = null;
+
+        if (value) {
+            _message = 'Your window has been opened'
+        }
+        else {
+            _message = 'Your window has been closed'
+        }
+
+        const toast = await this.toastCtrl.create({
+            message: _message,
+            duration: 2000
+        });
+
+        toast.present();
+    }
 }
