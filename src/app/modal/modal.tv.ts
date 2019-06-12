@@ -19,7 +19,7 @@ import { Console } from '@angular/core/src/console';
             <ion-grid>
                 <ion-row>
                     <ion-col align="left">
-                        <ion-button class="center" shape="round" (click)=presentToast($true,$,$)><ion-icon name="power"></ion-icon></ion-button>
+                        <ion-button class="center" shape="round" (click)=activationTV()><ion-icon name="power"></ion-icon></ion-button>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -107,41 +107,42 @@ export class ModalPageTvComponent {
     channelg: number;
 
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
-        this.volumeg = 0;
-        this.channelg = 0;
-        this.activationg = null;
+
     }
 
     async close() {
         this.ctrl.dismiss();
     }
 
-    async presentToast(activation: boolean, volume:number, channel:number) {
-
-        if (this.activationg == null) {
+    async activationTV() {
+        if (this.activationg == null || this.activationg == false) {
             const toast = await this.ctrl_t.create({
-                message: 'The tv is off, turn it on',
-                duration: 2000,
-            });
-            this.activationg = activation;
-            toast.present();
-        }
-        if (this.activationg == false) {
-            const toast = await this.ctrl_t.create({
-                message: 'The tv is off',
+                message: 'Tv turned on.',
                 duration: 2000
             });
             this.activationg = true;
             toast.present();
         }
-        if (this.activationg == true) {
+        else {
             const toast = await this.ctrl_t.create({
-                message: 'The tv is turned off',
+                message: 'Tv turned off.',
                 duration: 2000
-            })
+            });
             this.activationg = false;
             toast.present();
         }
+    }
+
+    async presentToast(activation: boolean, volume:number, channel:number) {
+
+        if (this.activationg == null || this.activationg == false) {
+            const toast = await this.ctrl_t.create({
+                message: 'The tv is off, turn it on',
+                duration: 2000,
+            });
+            toast.present();
+        }
+        
 
     }
     
