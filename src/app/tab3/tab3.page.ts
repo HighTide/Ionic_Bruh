@@ -26,7 +26,7 @@ export class Tab3Page {
 
         // let obj = "Bed";
         let cmp = null;
-        alert(obj)
+        //alert(obj)
 
         // Selects the object's class
         switch (obj) {
