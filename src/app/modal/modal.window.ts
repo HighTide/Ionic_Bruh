@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
 
 @Component({
     template:
@@ -40,10 +41,12 @@ export class ModalPageWindowComponent {
         let _message = null;
 
         if (value) {
-            _message = 'Your window has been opened'
+            _message = 'Your window has been opened';
+            sendMessage('WindowOn');
         }
         else {
-            _message = 'Your window has been closed'
+            _message = 'Your window has been closed';
+            sendMessage('WindowOff');
         }
 
         const toast = await this.toastCtrl.create({

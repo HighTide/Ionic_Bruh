@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
 
 @Component({
     template:
@@ -45,12 +46,15 @@ export class ModalPageLampComponent {
         let _message = null;
 
         if (value) {
-            _message = 'Your lamp has been turned on'
+            _message = 'Your lamp has been turned on';
+            sendMessage('LampOn');
         }
         else {
             _message = 'Your lamp has been turned off'
+            sendMessage('LampOff');
         }
 
+        
         const toast = await this.toastCtrl.create({
             message: _message,
             duration: 2000

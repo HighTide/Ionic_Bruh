@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
 
 @Component({
     template:
@@ -45,10 +46,12 @@ export class ModalPageFanComponent {
         let _message = null;
 
         if (value) {
-            _message = 'Your fan has been turned on'
+            _message = 'Your fan has been turned on';
+            sendMessage('FanOn');
         }
         else {
-            _message = 'Your fan has been turned off'
+            _message = 'Your fan has been turned off';
+            sendMessage('FanOff');
         }
 
         const toast = await this.toastCtrl.create({

@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
 
 @Component({
     template:
@@ -30,7 +31,7 @@ export class ModalPageFridgeComponent {
     }
 
     async toast() {
-
+        sendMessage('Fridge');
         const toast = await this.toastCtrl.create({
             message: 'Your request has been sent to the hotel',
             duration: 2000
