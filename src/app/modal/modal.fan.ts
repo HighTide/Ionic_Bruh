@@ -2,6 +2,7 @@
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { sendMessage } from './modal.functions';
+import { getStates } from './modal.functions';
 
 @Component({
     template:
@@ -38,11 +39,11 @@ export class ModalPageFanComponent {
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
 
     async close() {
+        getStates();
         this.ctrl.dismiss();
     }
 
     async toast(value) {
-
         let _message = null;
 
         if (value) {

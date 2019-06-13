@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      #messages { margin-bottom: 40px }
+        .img-thumbnail {
+            width: 15%;
+            height: 15%;
+            float: left;
+        }
+    </style>
+      
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  </head>
+  <body>
+      <div id="Bed">
+        <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107850920755230/Bed.png">
+      </div>
+      <div id="Fan">
+          <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107857044439190/fan-off.png">
+      </div>
+      <div id="Lamp">
+          <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691898032129/lemp.png">
+      </div>
+      <div id="Window">
+          <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126694930513953/windows.png">
+      </div>
+      <div id="Fridge">
+          <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126689179992074/fridge.png">
+      </div>
+      
+      <ul id='messages'></ul>
+    <form action="" style="visibility: hidden">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io();
+        $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+        socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+          window.scrollTo(0, document.body.scrollHeight);
+            switch(msg) {
+                case 'FanOn':
+                    document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107861834334211/On_fan.gif">';
+                    break;
+                case 'FanOff':
+                    document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107857044439190/fan-off.png">';
+                    break;
+                case 'LampOn':
+                    document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691990306846/lempon.png">';
+                    break;
+                case 'LampOff':
+                    document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691898032129/lemp.png">';
+                    break;
+                case 'Bed':
+                    document.getElementById('Bed').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107854355890186/bedmade.gif">';
+                    break;
+                case 'WindowOn':
+                    document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126693915361280/windowopen.png">';
+                    break;
+                case 'WindowOff':
+                    document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126694930513953/windows.png">';
+                    break;
+                case 'Fridge':
+                    document.getElementById('Fridge').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126686512545869/fridge_food.png">';
+                    break;
+                    }
+        });
+      });
+    </script>
+      
+  </body>
+</html>
