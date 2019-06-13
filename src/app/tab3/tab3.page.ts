@@ -20,7 +20,11 @@ import { ModalPageTvComponent } from '../modal/modal.tv';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-    constructor(public cameraPreview: CameraPreview, public modalController: ModalController, public toastController: ToastController, public platform: Platform) { }
+    constructor(
+        public cameraPreview: CameraPreview,
+        public modalController: ModalController,
+        public toastController: ToastController,
+        public platform: Platform) { }
 
     async presentModal(obj) {
 
@@ -117,6 +121,10 @@ export class Tab3Page {
         ionContent: any;
         distance: any;
         objName: any;
+        objTop: any;
+        objLeft: any;
+        objWidth: any;
+        objHeight: any;
 
 
         constructor(canvas) {
@@ -214,11 +222,18 @@ export class Tab3Page {
                     this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height);
                     // alert(JSON.stringify(pre));
 
-                    let tempDistance = this.getDistance((pre.boundingBox.left + pre.boundingBox.width / 2), (pre.boundingBox.top + pre.boundingBox.height / 2));
+                    const tempDistance = this.getDistance((pre.boundingBox.left + pre.boundingBox.width / 2),
+                        (pre.boundingBox.top + pre.boundingBox.height / 2));
 
                     if (this.distance == null || tempDistance < this.distance) {
                         this.distance = tempDistance;
-                        this.objName = pre.tagName;
+                        this.objName = pre.tagName
+
+                        this.objTop = pre.boundingBox.top;
+                        this.objLeft = pre.boundingBox.left;
+                        this.objHeight = pre.boundingBox.height;
+                        this.objWidth = pre.boundingBox.width;
+
                     }
                     //   context.presentModal(pre.tagName);
                 } else {
@@ -226,6 +241,7 @@ export class Tab3Page {
                 }
             });
             if (this.objName != null) {
+                this.DrawBox(this.objLeft, this.objTop, this.objWidth, this.objHeight, 'rgba(71, 214, 42, 1)');
                 context.presentModal(this.objName);
             }
             this.focus();
