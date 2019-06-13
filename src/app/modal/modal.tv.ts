@@ -3,7 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Console } from '@angular/core/src/console';
 
-
+declare var activationg: boolean;
+declare var channelg: number;
+declare var volumeg: number;
 
 @Component({
     template:
@@ -102,13 +104,13 @@ import { Console } from '@angular/core/src/console';
 
 
 export class ModalPageTvComponent {
-    activationg: boolean;
-    volumeg: number;
-    channelg: number;
+    //activationg: boolean;
+    //volumeg: number;
+    //channelg: number;
 
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
-        this.channelg = 0;
-        this.volumeg = 10;
+        //channelg = 0;
+        //volumeg = 10;
     }
 
     async close() {
@@ -117,12 +119,12 @@ export class ModalPageTvComponent {
 
     //Tv activation
     async activationTV() {
-        if (this.activationg == null || this.activationg == false) {
+        if (activationg == null || activationg == false) {
             const toast = await this.ctrl_t.create({
                 message: 'Tv turned on.',
                 duration: 2000
             });
-            this.activationg = true;
+            activationg = true;
             toast.present();
         }
         else {
@@ -130,14 +132,14 @@ export class ModalPageTvComponent {
                 message: 'Tv turned off.',
                 duration: 2000
             });
-            this.activationg = false;
+            activationg = false;
             toast.present();
         }
     }
 
     //Channel Switching with the Next and Prev buttons
     async channelSwitch(channel: number) {
-        if (this.activationg == null || this.activationg == false) {
+        if (activationg == null || activationg == false) {
             const toast = await this.ctrl_t.create({
                 message: 'The tv is off, turn it on',
                 duration: 2000,
@@ -145,34 +147,34 @@ export class ModalPageTvComponent {
             toast.present();
         }
         else {
-            if (this.channelg == 100 && channel == 1) {
-                this.channelg = 0;
+            if (channelg == 100 && channel == 1) {
+                channelg = 0;
                 const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + this.channelg.toString(),
+                    message: 'Channel set to ' + channelg.toString(),
                     duration: 2000
                 });
                 toast.present();
             }
             else if (channel == 1) {
-                this.channelg++;
+                channelg++;
                 const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + this.channelg.toString(),
+                    message: 'Channel set to ' + channelg.toString(),
                     duration: 2000
                 });
                 toast.present();
             }
-            if ((this.channelg == 0 || this.channelg == null) && channel == 2) {
-                this.channelg = 9;
+            if ((channelg == 0 || channelg == null) && channel == 2) {
+                channelg = 9;
                 const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + this.channelg.toString(),
+                    message: 'Channel set to ' + channelg.toString(),
                     duration: 2000
                 });
                 toast.present();
             }
-            else if (channel == 2 && this.channelg >= 1) {
-                this.channelg--;
+            else if (channel == 2 && channelg >= 1) {
+                channelg--;
                 const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + this.channelg.toString(),
+                    message: 'Channel set to ' + channelg.toString(),
                     duration: 2000
                 });
                 toast.present();
@@ -182,7 +184,7 @@ export class ModalPageTvComponent {
 
     //Volume changing with the Volume + and Volume - buttons
     async volumeSwitch(volume: number) {
-        if (this.activationg == null || this.activationg == false) {
+        if (activationg == null || activationg == false) {
             const toast = await this.ctrl_t.create({
                 message: 'The tv is off, turn it on',
                 duration: 2000,
@@ -190,7 +192,7 @@ export class ModalPageTvComponent {
             toast.present();
         }
         else {
-            if (this.volumeg == 100 && volume == 1) {
+            if (volumeg == 100 && volume == 1) {
                 const toast = await this.ctrl_t.create({
                     message: 'Maximum volume reached',
                     duration: 2000
@@ -198,24 +200,24 @@ export class ModalPageTvComponent {
                 toast.present();
             }
             else if (volume == 1) {
-                this.volumeg++;
+                volumeg++;
                 const toast = await this.ctrl_t.create({
-                    message: 'Volume set to ' + this.volumeg.toString(),
+                    message: 'Volume set to ' + volumeg.toString(),
                     duration: 2000
                 });
                 toast.present();
             }
-            if ((this.volumeg == 0 || this.volumeg == null) && volume == 2) {
+            if ((volumeg == 0 || volumeg == null) && volume == 2) {
                 const toast = await this.ctrl_t.create({
                     message: 'Minimum volume reached',
                     duration: 2000
                 });
                 toast.present();
             }
-            else if (volume == 2 && this.volumeg >= 1) {
-                this.volumeg--;
+            else if (volume == 2 && volumeg >= 1) {
+                volumeg--;
                 const toast = await this.ctrl_t.create({
-                    message: 'Volume set to ' + this.volumeg.toString(),
+                    message: 'Volume set to ' + volumeg.toString(),
                     duration: 2000
                 });
                 toast.present();
@@ -225,7 +227,7 @@ export class ModalPageTvComponent {
 
     async channelNumInput(channel:number) {
 
-        if (this.activationg == null || this.activationg == false) {
+        if (activationg == null || activationg == false) {
             const toast = await this.ctrl_t.create({
                 message: 'The tv is off, turn it on',
                 duration: 2000,
@@ -233,9 +235,9 @@ export class ModalPageTvComponent {
             toast.present();
         }
         else {
-            this.channelg = channel;
+            channelg = channel;
             const toast = await this.ctrl_t.create({
-                message: 'Channel set to ' + this.channelg.toString(),
+                message: 'Channel set to ' + channelg.toString(),
                 duration: 2000
             });
             toast.present();
