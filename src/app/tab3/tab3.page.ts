@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 
 // tslint:disable-next-line:max-line-length
@@ -19,7 +20,7 @@ import { ModalPageTvComponent } from '../modal/modal.tv';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-    constructor(public cameraPreview: CameraPreview, public modalController: ModalController, public toastController: ToastController) { }
+    constructor(public cameraPreview: CameraPreview, public modalController: ModalController, public toastController: ToastController, public platform: Platform) { }
 
     async presentModal(obj) {
 
@@ -289,8 +290,13 @@ export class Tab3Page {
     }
 
     Detect() {
-        this.cameraPreview.takePicture({ quality: 75 })
-            .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+        const quality = 25;
+        if (this.platform.is('ios')) {
+            this.cameraPreview.takePicture({ quality: quality })
+                .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+        } else if (this.platform.is('android')) {
+            this.cameraPreview.takeSnapshot({ quality: quality })
+                .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+        }
     }
-
 }
