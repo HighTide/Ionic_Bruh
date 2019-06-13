@@ -211,7 +211,7 @@ export class Tab3Page {
             // document.querySelector("#output").innerHTML = JSON.stringify(json);
             json.predictions.forEach((pre) => {
                 if (pre.probability >= 0.5) {
-                    //this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height);
+                    this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height);
                     // alert(JSON.stringify(pre));
 
                     let tempDistance = this.getDistance((pre.boundingBox.left + pre.boundingBox.width / 2), (pre.boundingBox.top + pre.boundingBox.height / 2));
