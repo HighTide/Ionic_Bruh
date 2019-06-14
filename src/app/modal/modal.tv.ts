@@ -3,9 +3,10 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Console } from '@angular/core/src/console';
 
-declare var activationg: boolean;
-declare var channelg: number;
-declare var volumeg: number;
+let activationg: boolean = false;
+let channelg: number = 0;
+let volumeg: number = 10;
+
 
 @Component({
     template:
