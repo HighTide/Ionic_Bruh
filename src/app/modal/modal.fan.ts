@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { sendMessage } from './modal.functions';
 import { getStates } from './modal.functions';
+import { Platform } from '@ionic/angular';
 
 @Component({
     template:
@@ -15,18 +16,21 @@ import { getStates } from './modal.functions';
         <ion-content>
             <div style="margin: 30px 10px 0px 10px !important;">
                 <ion-segment (ionChange)="segmentChanged($event)">
-                  <ion-segment-button (click)=toast(true)>
+                  <ion-segment-button id="FanOn" (click)=toast(true)>
                     <ion-label>On</ion-label>
                   </ion-segment-button>
 
-                  <ion-segment-button (click)=toast(false) checked>
+                  <ion-segment-button id="FanOff" (click)=toast(false) checked>
                     <ion-label>Off</ion-label>
                   </ion-segment-button>
+                
                 </ion-segment>
+
             </div>
 
         <div style="margin: 30px 10px 0px 10px !important;">
             <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
+
         </div>
             
         </ion-content>`,
@@ -36,10 +40,19 @@ import { getStates } from './modal.functions';
 
 export class ModalPageFanComponent {
 
-    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) {
+        
+    }
+    ionViewWillEnter() {
+        getStates();
+        setInterval(function () { getStates(); } , 3000);
+    }
+        
+        
+    
 
     async close() {
-        getStates();
+        
         this.ctrl.dismiss();
     }
 
@@ -63,3 +76,6 @@ export class ModalPageFanComponent {
         toast.present();
     }
 }
+
+
+//////////////////////////////////////////////
