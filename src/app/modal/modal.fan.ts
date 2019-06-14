@@ -44,12 +44,9 @@ export class ModalPageFanComponent {
         
     }
     ionViewWillEnter() {
-        getStates();
-        setInterval(function () { getStates(); } , 3000);
+        getStates("Fan");
+        setInterval(function () { getStates("Fan"); }, 3000);
     }
-        
-        
-    
 
     async close() {
         
@@ -76,6 +73,3 @@ export class ModalPageFanComponent {
         toast.present();
     }
 }
-
-
-//////////////////////////////////////////////
