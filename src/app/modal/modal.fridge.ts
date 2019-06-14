@@ -2,6 +2,7 @@
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { sendMessage } from './modal.functions';
+import { getStates } from './modal.functions';
 
 @Component({
     template:
@@ -12,7 +13,7 @@ import { sendMessage } from './modal.functions';
         </ion-header>
         <ion-content>
             <div style="margin: 30px 10px 0px 10px !important;">
-                <ion-button expand="block" (click)="toast()">Request refill fridge</ion-button>
+                <ion-button id="Fridge" expand="block" (click)="toast()">Request refill fridge</ion-button>
             </div>
             <div style="margin: 30px 10px 0px 10px !important;">
                 <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
@@ -25,7 +26,10 @@ import { sendMessage } from './modal.functions';
 export class ModalPageFridgeComponent {
 
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
-
+    ionViewWillEnter() {
+        getStates("Fridge");
+        setInterval(function () { getStates("Fridge"); }, 3000);
+    }
     async close() {
         this.ctrl.dismiss();
     }
