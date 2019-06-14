@@ -3,9 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Console } from '@angular/core/src/console';
 
-let activationg: boolean = false;
-let channelg: number = 0;
-let volumeg: number = 10;
+let Active: number = 0;
+let Channel_global: number = 0;
+let Volume_global: number = 10;
 
 
 @Component({
@@ -105,13 +105,7 @@ let volumeg: number = 10;
 
 
 export class ModalPageTvComponent {
-    //activationg: boolean;
-    //volumeg: number;
-    //channelg: number;
-
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
-        //channelg = 0;
-        //volumeg = 10;
     }
 
     async close() {
@@ -119,131 +113,54 @@ export class ModalPageTvComponent {
     }
 
     //Tv activation
+    // 0 means false
+    // 1 means true
     async activationTV() {
-        if (activationg == null || activationg == false) {
-            const toast = await this.ctrl_t.create({
-                message: 'Tv turned on.',
-                duration: 2000
-            });
-            activationg = true;
-            toast.present();
+        if (Active == 0) {
+            Active = 1;
         }
         else {
-            const toast = await this.ctrl_t.create({
-                message: 'Tv turned off.',
-                duration: 2000
-            });
-            activationg = false;
-            toast.present();
+            Active = 0;
         }
     }
 
     //Channel Switching with the Next and Prev buttons
+    //channel == 1 -> Next channel
+    //channel == 2 -> Previous channel
     async channelSwitch(channel: number) {
-        if (activationg == null || activationg == false) {
-            const toast = await this.ctrl_t.create({
-                message: 'The tv is off, turn it on',
-                duration: 2000,
-            });
-            toast.present();
-        }
-        else {
-            if (channelg == 100 && channel == 1) {
-                channelg = 0;
-                const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + channelg.toString(),
-                    duration: 2000
-                });
-                toast.present();
+        if(Active == 1) {
+            if (Channel_global == 9 && channel == 1) {
+                Channel_global = 0;
             }
             else if (channel == 1) {
-                channelg++;
-                const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + channelg.toString(),
-                    duration: 2000
-                });
-                toast.present();
+                Channel_global++;
             }
-            if ((channelg == 0 || channelg == null) && channel == 2) {
-                channelg = 9;
-                const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + channelg.toString(),
-                    duration: 2000
-                });
-                toast.present();
+            if ((Channel_global == 0 || Channel_global == null) && channel == 2) {
+                Channel_global = 9;
             }
-            else if (channel == 2 && channelg >= 1) {
-                channelg--;
-                const toast = await this.ctrl_t.create({
-                    message: 'Channel set to ' + channelg.toString(),
-                    duration: 2000
-                });
-                toast.present();
+            else if (channel == 2 && Channel_global >= 1) {
+                Channel_global--;
             }
         }  
     }
 
     //Volume changing with the Volume + and Volume - buttons
+    //volume == 1 -> Volume raise
+    //volume == 2 -> Volume sink
     async volumeSwitch(volume: number) {
-        if (activationg == null || activationg == false) {
-            const toast = await this.ctrl_t.create({
-                message: 'The tv is off, turn it on',
-                duration: 2000,
-            });
-            toast.present();
-        }
-        else {
-            if (volumeg == 100 && volume == 1) {
-                const toast = await this.ctrl_t.create({
-                    message: 'Maximum volume reached',
-                    duration: 2000
-                });
-                toast.present();
+        if (Active == 1) {
+            if (volume == 1 && Volume_global < 100) {
+                Volume_global++;
             }
-            else if (volume == 1) {
-                volumeg++;
-                const toast = await this.ctrl_t.create({
-                    message: 'Volume set to ' + volumeg.toString(),
-                    duration: 2000
-                });
-                toast.present();
-            }
-            if ((volumeg == 0 || volumeg == null) && volume == 2) {
-                const toast = await this.ctrl_t.create({
-                    message: 'Minimum volume reached',
-                    duration: 2000
-                });
-                toast.present();
-            }
-            else if (volume == 2 && volumeg >= 1) {
-                volumeg--;
-                const toast = await this.ctrl_t.create({
-                    message: 'Volume set to ' + volumeg.toString(),
-                    duration: 2000
-                });
-                toast.present();
+            if (volume == 2 && Volume_global > 0) {
+                Volume_global--;
             }
         }
     }
 
     async channelNumInput(channel:number) {
-
-        if (activationg == null || activationg == false) {
-            const toast = await this.ctrl_t.create({
-                message: 'The tv is off, turn it on',
-                duration: 2000,
-            });
-            toast.present();
+        if (Active == 1) {
+            Channel_global = channel;
         }
-        else {
-            channelg = channel;
-            const toast = await this.ctrl_t.create({
-                message: 'Channel set to ' + channelg.toString(),
-                duration: 2000
-            });
-            toast.present();
-        }
-
-    }
-    
+    }   
 }
