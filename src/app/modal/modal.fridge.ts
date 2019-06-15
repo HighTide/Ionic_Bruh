@@ -24,13 +24,14 @@ import { getStates } from './modal.functions';
 })
 
 export class ModalPageFridgeComponent {
-
-    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
+    interval: any;
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { this.interval = null; }
     ionViewWillEnter() {
         getStates("Fridge");
-        setInterval(function () { getStates("Fridge"); }, 3000);
+        this.interval = setInterval(function () { getStates("Fridge"); }, 3000);
     }
     async close() {
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 

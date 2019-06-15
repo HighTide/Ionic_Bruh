@@ -24,14 +24,15 @@ import { getStates } from './modal.functions';
 })
 
 export class ModalPageBedComponent {
-
-    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
+    interval: any;
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) {
+        this.interval = null;}
     ionViewWillEnter() {
         getStates("Bed");
-        setInterval(function () { getStates("Bed"); }, 3000);
-
+        this.interval = setInterval(function () { getStates("Bed"); }, 3000);
     }
     async close() {
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 

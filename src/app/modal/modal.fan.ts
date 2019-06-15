@@ -4,6 +4,8 @@ import { ToastController } from '@ionic/angular';
 import { sendMessage } from './modal.functions';
 import { getStates } from './modal.functions';
 import { Platform } from '@ionic/angular';
+import { interval } from 'rxjs';
+import { Timeouts } from 'selenium-webdriver';
 
 @Component({
     template:
@@ -39,17 +41,18 @@ import { Platform } from '@ionic/angular';
 })
 
 export class ModalPageFanComponent {
-
+    interval: any;
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) {
-        
+        this.interval = null;
     }
+    
     ionViewWillEnter() {
         getStates("Fan");
-        setInterval(function () { getStates("Fan"); }, 3000);
-    }
+        this.interval = setInterval(function () { getStates("Fan");}, 3000);
 
+    }
     async close() {
-        
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 

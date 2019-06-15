@@ -35,18 +35,19 @@ import { getStates } from './modal.functions';
 })
 
 export class ModalPageLampComponent {
-
-    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
+    interval: any;
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { this.interval = null }
     ionViewWillEnter() {
         getStates("Lamp");
-        setInterval(function () { getStates("Lamp"); }, 3000);
+        this.interval = setInterval(function () { getStates("Lamp"); }, 3000);
     }
     async close() {
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 
     async toast(value) {
-
+        
         let _message = null;
 
         if (value) {

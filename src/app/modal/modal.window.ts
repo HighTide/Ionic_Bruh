@@ -30,13 +30,14 @@ import { getStates } from './modal.functions';
 })
 
 export class ModalPageWindowComponent {
-
-    constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { }
+    interval: any
+    constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { this.interval = null; }
     ionViewWillEnter() {
         getStates("Window");
-        setInterval(function () { getStates("Window"); }, 3000);
+        this.interval = setInterval(function () { getStates("Window"); }, 3000);
     }
     async close() {
+        clearInterval(this.interval);
         this.modalCtrl.dismiss();
     }
 
