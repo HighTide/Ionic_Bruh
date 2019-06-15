@@ -31,8 +31,9 @@ export class ModalPageWindowComponent {
 
     constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
-    async close() {
-        this.modalCtrl.dismiss();
+    close(): void {
+        let isActive = false;
+        this.ctrl.dismiss(isActive);
     }
 
     async toast(value) {

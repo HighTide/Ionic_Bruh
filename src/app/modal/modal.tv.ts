@@ -2,6 +2,7 @@
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Console } from '@angular/core/src/console';
+import { Tab2Page } from '../tab2/tab2.page';
 
 let Active: number = 0;
 let Channel_global: number = 0;
@@ -104,12 +105,14 @@ let Volume_global: number = 10;
 })
 
 
-export class ModalPageTvComponent {
+export class ModalPageTvComponent  {
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
     }
 
-    async close() {
-        this.ctrl.dismiss();
+
+    close(): void {
+        let isActive = false;
+        this.ctrl.dismiss(isActive);
     }
 
     //Tv activation
