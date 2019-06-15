@@ -38,6 +38,13 @@
       <div id="Fridge">
           <img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126689179992074/fridge.png">
       </div>
+      <div>
+          <h1>Television</h1>
+          <hr>
+          <h4 id="Power"></h4>
+          <h4 id="Channel"></h4>
+          <h4 id="Volume"></h4>
+      </div>
       
       <ul id='messages'></ul>
     <form action="" style="visibility: hidden">
@@ -82,6 +89,19 @@
                     document.getElementById('Fridge').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126686512545869/fridge_food.png">';
                     break;
                     }
+            if (msg.includes("Television")) {
+                    var type = msg.replace("Television", "");
+
+                    var amount = type.replace("Channel", "");
+                    amount = amount.replace("Volume", "");
+                    amount = amount.replace("Power", "");
+
+                    type = msg.replace("Television", "");
+                    type = type.replace(amount, "");
+                    
+                    document.querySelector("#" + type).innerHTML = type + " : " + amount;
+        }
+            
         });
       });
     </script>

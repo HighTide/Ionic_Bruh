@@ -28,7 +28,6 @@ export async function getStates(current) {
 }
 
 function setButton(current) {
-    
     if (current != "Fridge" && current != "Bed") {
         if (states[current] == 0) {
             document.querySelector("#" + current + "On").checked = false;
@@ -39,9 +38,8 @@ function setButton(current) {
             document.querySelector("#" + current + "On").checked = true;
         }
     }
-    else if (states[current] != 0){
+    else if (states[current] != 0) {
         debugger;
         document.querySelector("#" + current).disabled = true;
     }
-
 }
