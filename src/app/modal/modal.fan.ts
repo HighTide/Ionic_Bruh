@@ -36,8 +36,9 @@ export class ModalPageFanComponent {
 
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
 
-    async close() {
-        this.ctrl.dismiss();
+    close(): void {
+        let isActive = false;
+        this.ctrl.dismiss(isActive);
     }
 
     async toast(value) {

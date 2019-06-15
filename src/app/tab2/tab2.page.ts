@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
 import {ModalPageBedComponent} from '../modal/modal.bed';
@@ -16,8 +16,10 @@ import { forEach } from '@angular/router/src/utils/collection';
     styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+    act: boolean;
 
     constructor(public modalController: ModalController, public toastController: ToastController) {
+        this.act = false;
     }
 
     async presentModal(obj) {
@@ -55,11 +57,22 @@ export class Tab2Page {
             }
         }
 
-        if (cmp !== false) {
+        
+
+        if (cmp !== false && this.act == false) {
             const modal = await this.modalController.create({
                 component: cmp,
                 componentProps: { value: 125 }
             });
+
+            modal.onDidDismiss().then((data) => {
+                const isActive = data;
+                if (isActive) {
+                    this.act = false;
+                }
+            });
+
+            this.act = true;
             return await modal.present();
         }
 
