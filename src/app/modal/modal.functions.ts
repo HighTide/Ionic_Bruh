@@ -1,5 +1,21 @@
 var states = { "Lamp": 0, "Fridge": 0, "Window": 0, "Fan": 0, "TV": { "power": 0, "channel": 0, "Volume": 0 } };
 var changed = "";
+function setButton(current) {
+    if (current != "Fridge" && current != "Bed") {
+        if (states[current] == 0) {
+            document.querySelector("#" + current + "On").checked = false;
+            document.querySelector("#" + current + "Off").checked = true;
+        }
+        else {
+            document.querySelector("#" + current + "Off").checked = false;
+            document.querySelector("#" + current + "On").checked = true;
+        }
+    }
+    else if (states[current] != 0) {
+        debugger;
+        document.querySelector("#" + current).disabled = true;
+    }
+}
 
 export function sendMessage(message) {
     changed = message.replace("Off" || "On", "");
@@ -27,19 +43,4 @@ export async function getStates(current) {
     xmlhttp.send();
 }
 
-function setButton(current) {
-    if (current != "Fridge" && current != "Bed") {
-        if (states[current] == 0) {
-            document.querySelector("#" + current + "On").checked = false;
-            document.querySelector("#" + current + "Off").checked = true;
-        }
-        else {
-            document.querySelector("#" + current + "Off").checked = false;
-            document.querySelector("#" + current + "On").checked = true;
-        }
-    }
-    else if (states[current] != 0) {
-        debugger;
-        document.querySelector("#" + current).disabled = true;
-    }
-}
+
