@@ -69,6 +69,10 @@ export class Tab3Page {
                 component: cmp,
                 componentProps: { value: 125 }
             });
+            modal.onDidDismiss().then(() => {
+                this.scanner = true;
+                this.BoundingBox.update();
+            });
             return await modal.present();
         }
 
