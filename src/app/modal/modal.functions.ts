@@ -7,8 +7,8 @@ function setButton(current) {
             (document.getElementById(current + "Off") as HTMLInputElement).checked = true;
         }
         else {
-            (document.getElementById(current + "Off") as HTMLInputElement).checked = false;
             (document.getElementById(current + "On") as HTMLInputElement).checked = true;
+            (document.getElementById(current + "Off") as HTMLInputElement).checked = false;
         }
     }
     else if (states[current] != 0) {
