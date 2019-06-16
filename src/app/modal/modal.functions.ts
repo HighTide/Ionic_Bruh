@@ -1,7 +1,7 @@
 let states = { "Lamp": 0, "Fridge": 0, "Window": 0, "Fan": 0, "TV": { "power": 0, "channel": 0, "Volume": 0 } };
 let changed = "";
 function setButton(current) {
-    if (current != "Fridge" && current != "Bed") {
+    if (current != "Fridge" && current != "Bed" && current != "Television") {
         if (states[current] == 0) {
             (document.getElementById(current + "On") as HTMLInputElement).checked = false;
             (document.getElementById(current + "Off") as HTMLInputElement).checked = true;
@@ -11,8 +11,11 @@ function setButton(current) {
             (document.getElementById(current + "Off") as HTMLInputElement).checked = false;
         }
     }
-    else if (states[current] != 0) {
+    else if (states[current] != 0 && current != "Television") {
         (document.getElementById(current) as HTMLInputElement).disabled = true;
+    }
+    else if (states[current] != 0) {
+        (document.getElementById(current) as HTMLInputElement).checked = true;
     }
 }
 export function sendMessage(message) {

@@ -97,14 +97,21 @@ import { getStates } from './modal.functions';
     export class ModalPageTvComponent {
     Channel_global: number;     
     Volume_global: number;     
-    Active: number;     
+    Active: number;
+    interval: any;
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
         this.Channel_global = 0;
         this.Active = 1;
         this.Volume_global = 10; 
+        this.interval = null;
     }
     
+    ionViewWillEnter() {
+        getStates("Television");
+        this.interval = setInterval(function () { getStates("Television"); }, 3000);
+    }
     async close() {
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 
