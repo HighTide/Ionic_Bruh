@@ -17,11 +17,11 @@ import { getStates } from './modal.functions';
 
             <div style="margin: 10px 10px 25px 10px !important;">
                 <ion-segment (ionChange)="segmentChanged($event)">
-                  <ion-segment-button id="TVOn" (click)=activationTV()>
+                  <ion-segment-button id="TelevisionOn" (click)=activationTV()>
                     <ion-label>On</ion-label>
                   </ion-segment-button>
 
-                  <ion-segment-button id="TVOff" (click)=activationTV() checked>
+                  <ion-segment-button id="TelevisionOff" (click)=activationTV() checked>
                     <ion-label>Off</ion-label>
                   </ion-segment-button>
                 </ion-segment>

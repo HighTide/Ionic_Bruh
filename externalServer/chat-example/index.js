@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-var states = {"Bed":0,"Lamp":0,"Fridge":0,"Window":0,"Fan":0,"TV":{"power":0,"channel":0,Volume:0}};
+var states = {"Bed":0,"Lamp":0,"Fridge":0,"Window":0,"Fan":0,"Television":0};
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -40,6 +40,9 @@ app.get('/send', function(req, res) {
                     break;
                 case 'Bed':
                     states.Bed = 1;
+                    break;
+                case 'Television':
+                    states.Television = 1;
                     break;
                     }
     console.log(JSON.stringify(states));
