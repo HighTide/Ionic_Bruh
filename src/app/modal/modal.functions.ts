@@ -1,6 +1,7 @@
 var states = { "Lamp": 0, "Fridge": 0, "Window": 0, "Fan": 0, "TV": { "power": 0, "channel": 0, "Volume": 0 } };
 var changed = "";
-function setButton(current) {
+
+/*function setButton(current) {
     if (current != "Fridge" && current != "Bed") {
         if (states[current] == 0) {
             document.querySelector("#" + current + "On").checked = false;
@@ -14,7 +15,7 @@ function setButton(current) {
     else if (states[current] != 0) {
         document.querySelector("#" + current).disabled = true;
     }
-}
+}*/
 
 export function sendMessage(message) {
     changed = message.replace("Off" || "On", "");
@@ -26,19 +27,16 @@ export function sendMessage(message) {
 }
 
 export async function getStates(current) {
-    
-    var xmlhttp = new XMLHttpRequest();
+    const xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             states = JSON.parse(xmlhttp.responseText);
-            setButton(current);
-            
+            //setButton(current);
         }
-            return states;
+        return states;
         }
-    
     const theUrl = 'http://localhost:3000/getStates';
-    xmlhttp.open("GET", theUrl);
+    xmlhttp.open('GET', theUrl);
     xmlhttp.send();
 }
 
