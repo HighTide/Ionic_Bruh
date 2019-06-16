@@ -1,5 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
+import { getStates } from './modal.functions';
 
 @Component({
     template:
@@ -11,10 +13,10 @@ import { ModalController, ToastController } from '@ionic/angular';
         <ion-content>
             <div style="margin: 30px 10px 0px 10px !important;">
                 <ion-segment (ionChange)="segmentChanged($event)">
-                  <ion-segment-button (click)=toast(true)>
+                  <ion-segment-button id="WindowOn" (click)=toast(true)>
                     <ion-label>Open</ion-label>
                   </ion-segment-button>
-                  <ion-segment-button (click)=toast(false) checked>
+                  <ion-segment-button id="WindowOff" (click)=toast(false) checked>
                     <ion-label>Close</ion-label>
                   </ion-segment-button>
                 </ion-segment>
@@ -28,10 +30,14 @@ import { ModalController, ToastController } from '@ionic/angular';
 })
 
 export class ModalPageWindowComponent {
-
-    constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { }
-
+    interval: any
+    constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { this.interval = null; }
+    ionViewWillEnter() {
+        getStates("Window");
+        this.interval = setInterval(function () { getStates("Window"); }, 3000);
+    }
     async close() {
+        clearInterval(this.interval);
         this.modalCtrl.dismiss();
     }
 
@@ -40,10 +46,12 @@ export class ModalPageWindowComponent {
         let _message = null;
 
         if (value) {
-            _message = 'Your window has been opened'
+            _message = 'Your window has been opened';
+            sendMessage('WindowOn');
         }
         else {
-            _message = 'Your window has been closed'
+            _message = 'Your window has been closed';
+            sendMessage('WindowOff');
         }
 
         const toast = await this.toastCtrl.create({

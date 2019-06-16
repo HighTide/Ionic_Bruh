@@ -1,6 +1,11 @@
 ﻿import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { sendMessage } from './modal.functions';
+import { getStates } from './modal.functions';
+import { Platform } from '@ionic/angular';
+import { interval } from 'rxjs';
+import { Timeouts } from 'selenium-webdriver';
 
 @Component({
     template:
@@ -13,18 +18,21 @@ import { ToastController } from '@ionic/angular';
         <ion-content>
             <div style="margin: 30px 10px 0px 10px !important;">
                 <ion-segment (ionChange)="segmentChanged($event)">
-                  <ion-segment-button (click)=toast(true)>
+                  <ion-segment-button id="FanOn" (click)=toast(true)>
                     <ion-label>On</ion-label>
                   </ion-segment-button>
 
-                  <ion-segment-button (click)=toast(false) checked>
+                  <ion-segment-button id="FanOff" (click)=toast(false) checked>
                     <ion-label>Off</ion-label>
                   </ion-segment-button>
+                
                 </ion-segment>
+
             </div>
 
         <div style="margin: 30px 10px 0px 10px !important;">
             <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
+
         </div>
             
         </ion-content>`,
@@ -33,22 +41,31 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class ModalPageFanComponent {
+    interval: any;
+    constructor(private ctrl: ModalController, private toastCtrl: ToastController) {
+        this.interval = null;
+    }
+    
+    ionViewWillEnter() {
+        getStates("Fan");
+        this.interval = setInterval(function () { getStates("Fan");}, 3000);
 
-    constructor(private ctrl: ModalController, private toastCtrl: ToastController) { }
-
+    }
     async close() {
+        clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 
     async toast(value) {
-
         let _message = null;
 
         if (value) {
-            _message = 'Your fan has been turned on'
+            _message = 'Your fan has been turned on';
+            sendMessage('FanOn');
         }
         else {
-            _message = 'Your fan has been turned off'
+            _message = 'Your fan has been turned off';
+            sendMessage('FanOff');
         }
 
         const toast = await this.toastCtrl.create({
