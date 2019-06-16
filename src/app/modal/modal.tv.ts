@@ -9,19 +9,25 @@ import { getStates } from './modal.functions';
     template:
         `<ion-header>
             <ion-toolbar>
-            <ion-button color="light" (click)="close()">
-                <ion-icon name="close"></ion-icon>
-            </ion-button>
                 <ion-title>TV</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content fullscreen>
             <ion-grid>
-                <ion-row>
-                    <ion-col align="left">
-                        <ion-button class="center" shape="round" (click)=activationTV()><ion-icon name="power"></ion-icon></ion-button>
-                    </ion-col>
-                </ion-row>
+
+            <div style="margin: 10px 10px 25px 10px !important;">
+                <ion-segment (ionChange)="segmentChanged($event)">
+                  <ion-segment-button id="TVOn" (click)=activationTV()>
+                    <ion-label>On</ion-label>
+                  </ion-segment-button>
+
+                  <ion-segment-button id="TVOff" (click)=activationTV() checked>
+                    <ion-label>Off</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+            </div>
+
+
                 <ion-row>
                     <ion-col size="3">
                     </ion-col>
@@ -78,23 +84,11 @@ import { getStates } from './modal.functions';
                         <ion-button class="center" (click)=channelSwitch(2)>Prev</ion-button>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="3.5">
-                    </ion-col>
-                    <ion-col>
-                    BruH TV Remote
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col size="3">
-                    </ion-col>
-                    <ion-col size="3">
-                    Made by Rick
-                    </ion-col>
-                    <ion-col size="3">
-                    </ion-col>
-                </ion-row>
             </ion-grid>
+
+            <div style="margin: 30px 10px 0px 10px !important;">
+                <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
+            </div>
         </ion-content>`,
 
     selector: 'page-modal'
