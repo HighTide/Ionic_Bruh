@@ -90,11 +90,14 @@
                     break;
                     }
             if (msg.includes("Television")) {
+                    msg = msg.replace("On", "Power1");
+                    msg = msg.replace("Off", "Power0");
                     let type = msg.replace("Television", "");
+
 
                     let amount = type.replace("Channel", "");
                     amount = amount.replace("Volume", "");
-                    amount = amount.replace("On" || "Off", "");
+                    amount = amount.replace("Power", "");
 
                     type = msg.replace("Television", "");
                     type = type.replace(amount, "");

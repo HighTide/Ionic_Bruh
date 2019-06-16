@@ -36,10 +36,10 @@ app.get('/send', function(req, res) {
             states.Window = 0;
             break;
         case 'TelevisionOn':
-            states.Television = 1;
+            states.TV.Power = 1;
             break;
         case 'TelevisionOff':
-            states.Window = 0;
+            states.TV.Power = 0;
             break;
         case 'Fridge':
             states.Fridge = 1;
@@ -57,12 +57,6 @@ app.get('/send', function(req, res) {
 
         states['TV'][type] = amount;
         }
-    else if(msg === "TelevisionOn") {
-        states.TV.Power = 1;
-    }
-    else if (msg === "TelevisionOff") {
-        states.TV.Power = 0;
-    }
     console.log(JSON.stringify(states));
     res.sendStatus(200);
 });
