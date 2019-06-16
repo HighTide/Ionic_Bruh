@@ -20,6 +20,7 @@ import { ModalPageTvComponent } from '../modal/modal.tv';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+    public IntervalTimer;
     constructor(
         public cameraPreview: CameraPreview,
         public modalController: ModalController,
@@ -274,11 +275,14 @@ export class Tab3Page {
         console.log('Entering Tab3');
 
         // start camera
+
         this.cameraPreview.startCamera(this.cameraPreviewOpts).then(
             (res) => {
-                console.log(res);
-                this.BoundingBox.update();
-                this.Detect();
+                this.IntervalTimer = setInterval(function () {
+                    console.log(res);
+                    this.BoundingBox.update();
+                    this.Detect();
+                }, 500);     
             },
             (err) => {
                 console.log(err);

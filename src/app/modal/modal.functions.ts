@@ -3,22 +3,22 @@ var changed = "";
 function setButton(current) {
     if (current != "Fridge" && current != "Bed") {
         if (states[current] == 0) {
-            document.querySelector("#" + current + "On").checked = false;
-            document.querySelector("#" + current + "Off").checked = true;
+            (document.querySelector("#" + current + "On") as HTMLInputElement).checked = false;
+            (document.querySelector("#" + current + "Off") as HTMLInputElement).checked = true;
         }
         else {
-            document.querySelector("#" + current + "Off").checked = false;
-            document.querySelector("#" + current + "On").checked = true;
+            (document.querySelector("#" + current + "Off") as HTMLInputElement).checked = false;
+            (document.querySelector("#" + current + "On") as HTMLInputElement).checked = true;
         }
     }
     else if (states[current] != 0) {
-        document.querySelector("#" + current).disabled = true;
+        (document.querySelector("#" + current) as HTMLInputElement).disabled = true;
     }
 }
 
 export function sendMessage(message) {
     changed = message.replace("Off" || "On", "");
-    const url = 'http://192.168.0.22:3000/send?msg=' + message;
+    const url = 'http://localhost:3000/send?msg=' + message;
     console.log(url);
     const Req = new XMLHttpRequest();
     Req.open('GET', url, true);

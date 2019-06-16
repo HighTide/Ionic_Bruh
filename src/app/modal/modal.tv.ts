@@ -85,15 +85,6 @@ import { getStates } from './modal.functions';
                     BruH TV Remote
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="3">
-                    </ion-col>
-                    <ion-col size="3">
-                    Made by Rick
-                    </ion-col>
-                    <ion-col size="3">
-                    </ion-col>
-                </ion-row>
             </ion-grid>
         </ion-content>`,
 
