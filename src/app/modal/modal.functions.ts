@@ -12,7 +12,6 @@ function setButton(current) {
         }
     }
     else if (states[current] != 0) {
-        debugger;
         document.querySelector("#" + current).disabled = true;
     }
 }
