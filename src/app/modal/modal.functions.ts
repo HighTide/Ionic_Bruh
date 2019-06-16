@@ -12,7 +12,7 @@ function setButton(current) {
         }
     }
     else if (states[current] != 0) {
-        (document.getElementById(current + "Power") as HTMLInputElement).checked = true;
+        (document.getElementById(current) as HTMLInputElement).disabled = true;
     }
 }
 export function sendMessage(message) {
