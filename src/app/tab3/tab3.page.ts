@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 
-
 // tslint:disable-next-line:max-line-length
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
 
@@ -20,6 +19,8 @@ import { ModalPageTvComponent } from '../modal/modal.tv';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+    public scanner: boolean;
+
     constructor(
         public cameraPreview: CameraPreview,
         public modalController: ModalController,
@@ -68,51 +69,14 @@ export class Tab3Page {
                 component: cmp,
                 componentProps: { value: 125 }
             });
+            modal.onDidDismiss().then(() => {
+                this.scanner = true;
+                this.BoundingBox.update();
+            });
             return await modal.present();
         }
 
     }
-
-    //async presentToast() {
-
-    //    const obj = 'Bed';
-    //    let cmp = null;
-
-    //    // Selects the object's class 
-    //    switch (obj) {
-    //        case 'Fan'.toString(): {
-    //            // cmp = ;
-    //            break;
-    //        }
-    //        case 'Window'.toString(): {
-    //            cmp = 'Window is opened!';
-    //            break;
-    //        }
-    //        case 'Bed'.toString(): {
-    //            cmp = 'New sheets have been requested';
-    //            break;
-    //        }
-    //        case 'Lamp'.toString(): {
-    //            //cmp = ;
-    //            break;
-    //        }
-    //        case 'Fridge'.toString(): {
-    //            // cmp = ;
-    //            break;
-    //        }
-    //        case 'TV'.toString(): {
-    //            // cmp = ;
-    //            break;
-    //        }
-    //        default: { }
-    //    }
-
-    //    const toast = await this.toastController.create({
-    //        message: cmp,
-    //        duration: 2000
-    //    });
-    //    toast.present();
-    //}
 
     static BoundingBoxCanvas = class {
         id: string;
@@ -215,7 +179,7 @@ export class Tab3Page {
 
         ParseOutput(context, json) {
             json = JSON.parse(json);
-            console.log(json);
+            //console.log(json);
             // document.querySelector("#output").innerHTML = JSON.stringify(json);
             json.predictions.forEach((pre) => {
                 if (pre.probability >= 0.5) {
@@ -240,9 +204,15 @@ export class Tab3Page {
                     // this.DrawBox(pre.boundingBox.left, pre.boundingBox.top, pre.boundingBox.width, pre.boundingBox.height, "Green")
                 }
             });
-            if (this.objName != null) {
-                this.DrawBox(this.objLeft, this.objTop, this.objWidth, this.objHeight, 'rgba(71, 214, 42, 1)');
-                context.presentModal(this.objName);
+            if (context.scanner) {
+                if (this.objName != null) {
+                    this.DrawBox(this.objLeft, this.objTop, this.objWidth, this.objHeight, 'rgba(70, 215, 45, 1)');
+                    context.presentModal(this.objName);
+                    context.scanner = false;
+                    console.log('Match Found, Turning this.scanner off');
+                }
+            } else {
+                console.log('[Ignored] Match Found, But this.scanner is off');
             }
             this.focus();
         }
@@ -278,6 +248,7 @@ export class Tab3Page {
             (res) => {
                 console.log(res);
                 this.BoundingBox.update();
+                this.scanner = true;
                 this.Detect();
             },
             (err) => {
@@ -295,6 +266,7 @@ export class Tab3Page {
 
     ionViewWillLeave() {
         console.log('Leaving Tab3');
+        this.scanner = false;
         this.cameraPreview.stopCamera().then(
             (res) => {
                 // console.log(res);
@@ -307,12 +279,20 @@ export class Tab3Page {
 
     Detect() {
         const quality = 25;
-        if (this.platform.is('ios')) {
-            this.cameraPreview.takePicture({ quality: quality })
-                .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
-        } else if (this.platform.is('android')) {
-            this.cameraPreview.takeSnapshot({ quality: quality })
-                .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+
+        setTimeout(() => {
+            this.Detect();
+        }, 5000);
+
+        if (this.scanner) {
+            if (this.platform.is('ios')) {
+                this.cameraPreview.takePicture({ quality: quality })
+                    .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+
+            } else if (this.platform.is('android')) {
+                this.cameraPreview.takeSnapshot({ quality: quality })
+                    .then(base64Picture => this.BoundingBox.UploadToCloud(this, 'data:image/jpeg;base64,' + base64Picture));
+            }
         }
     }
 }
