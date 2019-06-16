@@ -25,18 +25,16 @@ export function sendMessage(message) {
 }
 
 export async function getStates(current) {
-    
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             states = JSON.parse(xmlhttp.responseText);
             setButton(current);
             return states;
             } 
         }
-    
     const theUrl = 'http://localhost:3000/getStates';
-    xmlhttp.open("GET", theUrl);
+    xmlhttp.open('GET', theUrl);
     xmlhttp.send();
 }
 

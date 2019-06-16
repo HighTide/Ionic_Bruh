@@ -15,3 +15,5 @@ ionic cordova prepare android
 ionic cordova run android -l
 #### Simulator
 Make sure the Android Simulator is open and running
+## Unit Testing
+npm test
