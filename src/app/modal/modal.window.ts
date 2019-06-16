@@ -33,7 +33,7 @@ export class ModalPageWindowComponent {
 
     close(): void {
         let isActive = false;
-        this.ctrl.dismiss(isActive);
+        this.modalCtrl.dismiss(isActive);
     }
 
     async toast(value) {
