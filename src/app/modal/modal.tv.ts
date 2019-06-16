@@ -26,6 +26,17 @@ import { getStates } from './modal.functions';
                   </ion-segment-button>
                 </ion-segment>
             </div>
+                <div style="margin: 10px 10px 25px 10px !important;">
+                    <ion-segment (ionChange)="segmentChanged($event)">
+                        <ion-segment-button disabled>
+                            <ion-label id="Channel">Channel: </ion-label>
+                        </ion-segment-button>
+
+                        <ion-segment-button disabled="">
+                            <ion-label id="Volume">Volume: </ion-label>
+                        </ion-segment-button>
+                    </ion-segment>
+                </div>
 
 
                 <ion-row>
@@ -95,85 +106,82 @@ import { getStates } from './modal.functions';
 })
 
     export class ModalPageTvComponent {
-    Channel_global: number;     
-    Volume_global: number;     
+    Channel_global: number;
+    Volume_global: number;
     Active: number;
     interval: any;
     constructor(private ctrl: ModalController, private ctrl_t: ToastController) {
         this.Channel_global = 0;
         this.Active = 1;
-        this.Volume_global = 10; 
+        this.Volume_global = 10;
         this.interval = null;
     }
-    
     ionViewWillEnter() {
-        getStates("Television");
-        this.interval = setInterval(function () { getStates("Television"); }, 3000);
+        getStates('Television');
+        this.interval = setInterval(function () { getStates('Television'); }, 3000);
     }
     async close() {
         clearInterval(this.interval);
         this.ctrl.dismiss();
     }
 
-    //Tv activation
+    // Tv activation
     // 0 means false
     // 1 means true
     async activationTV() {
-        if (this.Active == 0) {
+        if (this.Active === 0) {
             this.Active = 1;
-        }
-        else {
+            sendMessage('TelevisionOn');
+        } else {
             this.Active = 0;
             this.Channel_global = 0;
             this.Volume_global = 10;
-            sendMessage("TelevisionVolume" + this.Volume_global.toString());
-            sendMessage("TelevisionChannel" + this.Channel_global.toString());
+            sendMessage('TelevisionVolume' + this.Volume_global.toString());
+            sendMessage('TelevisionChannel' + this.Channel_global.toString());
+            sendMessage('TelevisionOff');
         }
-        sendMessage("TelevisionPower" + this.Active.toString());
-        
+
     }
 
-    //Channel Switching with the Next and Prev buttons
-    //channel == 1 -> Next channel
-    //channel == 2 -> Previous channel
+    // Channel Switching with the Next and Prev buttons
+    // channel == 1 -> Next channel
+    // channel == 2 -> Previous channel
     async channelSwitch(channel: number) {
-        if (this.Active == 1) {
-            if (this.Channel_global == 9 && channel == 1) {
+        if (this.Active === 1) {
+            if (this.Channel_global === 9 && channel === 1) {
                 this.Channel_global = 0;
-            }
-            else if (channel == 1) {
+            } else if (channel === 1) {
                 this.Channel_global++;
             }
-            if ((this.Channel_global == 0 || this.Channel_global == null) && channel == 2) {
+            if ((this.Channel_global === 0 || this.Channel_global == null) && channel == 2) {
                 this.Channel_global = 9;
-            }
-            else if (channel == 2 && this.Channel_global >= 1) {
+            } else if (channel === 2 && this.Channel_global >= 1) {
                 this.Channel_global--;
             }
         }
-        sendMessage("TelevisionChannel" +this.Channel_global.toString());
+        sendMessage('TelevisionChannel' + this.Channel_global.toString());
     }
 
-    //Volume changing with the Volume + and Volume - buttons
-    //volume == 1 -> Volume raise
-    //volume == 2 -> Volume sink
+    // Volume changing with the Volume + and Volume - buttons
+    // volume == 1 -> Volume raise
+    // volume == 2 -> Volume sink
     async volumeSwitch(volume: number) {
-        if (this.Active == 1) {
-            if (volume == 1 && this.Volume_global < 100) {
+        if (this.Active === 1) {
+            if (volume === 1 && this.Volume_global < 100) {
                 this.Volume_global++;
             }
-            if (volume == 2 && this.Volume_global > 0) {
+            if (volume === 2 && this.Volume_global > 0) {
                 this.Volume_global--;
             }
         }
-        sendMessage("TelevisionVolume" +this.Volume_global.toString());
+        sendMessage('TelevisionVolume' + this.Volume_global.toString());
     }
 
     async channelNumInput(channel: number) {
-        if (this.Active == 1) {
+        if (this.Active === 1) {
             this.Channel_global = channel;
         }
-        sendMessage("TelevisionChannel" +this.Channel_global.toString());
+        sendMessage('TelevisionChannel' + this.Channel_global.toString());
     }
 
 }
