@@ -55,7 +55,7 @@ export class Tab3Page {
                 cmp = ModalPageFridgeComponent;
                 break;
             }
-            case 'TV'.toString(): {
+            case 'Television'.toString(): {
                 cmp = ModalPageTvComponent;
                 break;
             }

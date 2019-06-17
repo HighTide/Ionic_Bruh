@@ -25,7 +25,7 @@ function setButton(current) {
 }
 export function sendMessage(message) {
     changed = message.replace('Off' || 'On', '');
-    const url = 'http://localhost:3000/send?msg=' + message;
+    const url = 'http://2ada98ae.ngrok.io/send?msg=' + message;
     console.log(url);
     const Req = new XMLHttpRequest();
     Req.open('GET', url, true);
@@ -41,7 +41,7 @@ export async function getStates(current) {
             return states;
             }
         };
-    const theUrl = 'http://localhost:3000/getStates';
+    const theUrl = 'http://2ada98ae.ngrok.io/getStates';
     xmlhttp.open('GET', theUrl);
     xmlhttp.send();
 }

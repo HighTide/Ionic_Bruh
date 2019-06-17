@@ -119,6 +119,7 @@ import { getStates } from './modal.functions';
     ionViewWillEnter() {
         getStates('Television');
         this.interval = setInterval(function () { getStates('Television'); }, 3000);
+        // (document.querySelector('.show-modal') as  HTMLElement).style.marginTop = "20%"
     }
     async close() {
         clearInterval(this.interval);
