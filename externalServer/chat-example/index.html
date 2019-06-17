@@ -93,46 +93,49 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-        $(function () {
-            var socket = io();
-            $('form').submit(function () {
-                socket.emit('chat message', $('#m').val());
-                $('#m').val('');
-                return false;
-            });
-            socket.on('chat message', function (msg) {
-                console.log(msg);
-                window.scrollTo(0, document.body.scrollHeight);
-                switch (msg) {
-                    case 'FanOn':
-                        document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107861834334211/On_fan.gif">';
-                        break;
-                    case 'FanOff':
-                        document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107857044439190/fan-off.png">';
-                        break;
-                    case 'LampOn':
-                        document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691990306846/lempon.png">';
-                        break;
-                    case 'LampOff':
-                        document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691898032129/lemp.png">';
-                        break;
-                    case 'Bed':
-                        document.getElementById('Bed').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107854355890186/bedmade.gif">';
-                        break;
-                    case 'WindowOn':
-                        document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126693915361280/windowopen.png">';
-                        break;
-                    case 'WindowOff':
-                        document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126694930513953/windows.png">';
-                        break;
-                    case 'Fridge':
-                        document.getElementById('Fridge').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126686512545869/fridge_food.png">';
-                        break;
-                }
-                if (msg.includes("Television")) {
-                    var type = msg.replace("Television", "");
+      $(function () {
+        var socket = io();
+        $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+        socket.on('chat message', function(msg){
+          console.log(msg);
+          window.scrollTo(0, document.body.scrollHeight);
+            switch(msg) {
+                case 'FanOn':
+                    document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107861834334211/On_fan.gif">';
+                    break;
+                case 'FanOff':
+                    document.getElementById('Fan').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107857044439190/fan-off.png">';
+                    break;
+                case 'LampOn':
+                    document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691990306846/lempon.png">';
+                    break;
+                case 'LampOff':
+                    document.getElementById('Lamp').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126691898032129/lemp.png">';
+                    break;
+                case 'Bed':
+                    document.getElementById('Bed').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/502959975707049984/588107854355890186/bedmade.gif">';
+                    break;
+                case 'WindowOn':
+                    document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126693915361280/windowopen.png">';
+                    break;
+                case 'WindowOff':
+                    document.getElementById('Window').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126694930513953/windows.png">';
+                    break;
+                case 'Fridge':
+                    document.getElementById('Fridge').innerHTML = '<img class="img-thumbnail" src="https://cdn.discordapp.com/attachments/297359955789348876/588126686512545869/fridge_food.png">';
+                    break;
+                    }
+            if (msg.includes("Television")) {
+                    msg = msg.replace("On", "Power1");
+                    msg = msg.replace("Off", "Power0");
+                    let type = msg.replace("Television", "");
 
-                    var amount = type.replace("Channel", "");
+
+                    let amount = type.replace("Channel", "");
                     amount = amount.replace("Volume", "");
                     amount = amount.replace("Power", "");
 

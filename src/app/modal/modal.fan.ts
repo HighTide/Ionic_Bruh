@@ -25,16 +25,12 @@ import { Timeouts } from 'selenium-webdriver';
                   <ion-segment-button id="FanOff" (click)=toast(false) checked>
                     <ion-label>Off</ion-label>
                   </ion-segment-button>
-                
                 </ion-segment>
-
             </div>
 
         <div style="margin: 30px 10px 0px 10px !important;">
             <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
-
         </div>
-            
         </ion-content>`,
 
     selector: 'page-modal'
@@ -45,11 +41,9 @@ export class ModalPageFanComponent {
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) {
         this.interval = null;
     }
-    
     ionViewWillEnter() {
-        getStates("Fan");
-        this.interval = setInterval(function () { getStates("Fan");}, 3000);
-
+        getStates('Fan');
+        this.interval = setInterval(function () { getStates('Fan'); }, 3000);
     }
     async close() {
         clearInterval(this.interval);
@@ -62,8 +56,7 @@ export class ModalPageFanComponent {
         if (value) {
             _message = 'Your fan has been turned on';
             sendMessage('FanOn');
-        }
-        else {
+        } else {
             _message = 'Your fan has been turned off';
             sendMessage('FanOff');
         }

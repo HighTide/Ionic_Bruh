@@ -28,7 +28,6 @@ import { getStates } from './modal.functions';
         <div style="margin: 30px 10px 0px 10px !important;">
             <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
         </div>
-            
         </ion-content>`,
 
     selector: 'page-modal'
@@ -38,8 +37,8 @@ export class ModalPageLampComponent {
     interval: any;
     constructor(private ctrl: ModalController, private toastCtrl: ToastController) { this.interval = null }
     ionViewWillEnter() {
-        getStates("Lamp");
-        this.interval = setInterval(function () { getStates("Lamp"); }, 3000);
+        getStates('lamp');
+        this.interval = setInterval(function () { getStates('lamp'); }, 3000);
     }
     async close() {
         clearInterval(this.interval);
@@ -47,19 +46,15 @@ export class ModalPageLampComponent {
     }
 
     async toast(value) {
-        
         let _message = null;
 
         if (value) {
             _message = 'Your lamp has been turned on';
             sendMessage('LampOn');
-        }
-        else {
+        } else {
             _message = 'Your lamp has been turned off'
             sendMessage('LampOff');
         }
-
-        
         const toast = await this.toastCtrl.create({
             message: _message,
             duration: 2000
@@ -67,5 +62,4 @@ export class ModalPageLampComponent {
 
         toast.present();
     }
- 
 }

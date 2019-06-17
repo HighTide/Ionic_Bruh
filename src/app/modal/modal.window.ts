@@ -23,7 +23,7 @@ import { getStates } from './modal.functions';
             </div>
             <div style="margin: 30px 10px 0px 10px !important;">
                 <ion-button expand="block" color="dark" (click)="close()">Close options</ion-button>
-            </div>           
+            </div>
         </ion-content>`,
 
     selector: 'page-modal'
@@ -33,8 +33,8 @@ export class ModalPageWindowComponent {
     interval: any
     constructor(private modalCtrl: ModalController, private toastCtrl: ToastController) { this.interval = null; }
     ionViewWillEnter() {
-        getStates("Window");
-        this.interval = setInterval(function () { getStates("Window"); }, 3000);
+        getStates('Window');
+        this.interval = setInterval(function () { getStates('Window'); }, 3000);
     }
     async close() {
         clearInterval(this.interval);
@@ -48,8 +48,7 @@ export class ModalPageWindowComponent {
         if (value) {
             _message = 'Your window has been opened';
             sendMessage('WindowOn');
-        }
-        else {
+        } else {
             _message = 'Your window has been closed';
             sendMessage('WindowOff');
         }
